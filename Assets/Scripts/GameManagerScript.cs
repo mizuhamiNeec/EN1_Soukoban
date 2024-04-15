@@ -14,16 +14,17 @@ public class GameManagerScript : MonoBehaviour {
 		{
 			{ 1, 0, 0, 0, 1 },
 			{ 0, 0, 1, 0, 0 },
-			{ 1, 0, 0, 0, 0 }
+			{ 1, 0, 0, 0, 0 },
 		};
 
-		_cam.position = new Vector3((map.GetLength(1) - 1) * 0.5f, (-map.GetLength(0) - 1) * 0.5f, -5);
+		// 配列の中心にカメラを置く
+		_cam.position = new Vector3((map.GetLength(1) - 1) * 0.5f, (-map.GetLength(0) + 1) * 0.5f, -10);
 
 		string debugText = string.Empty;
 
 		for (int y = 0; y < map.GetLength(0); y++) {
 			for (int x = 0; x < map.GetLength(1); x++) {
-				if (map[y, x] == 1 || map[y, x] == 0) {
+				if (map[y, x] == 1) {
 					GameObject instance = Instantiate(
 						playerPrefab,
 						new Vector3(x, -y, 0),
