@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour {
 	// Start is called before the first frame update
 	private void Awake() {
 		_rb = GetComponent<Rigidbody>();
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	// Update is called once per frame
@@ -25,7 +26,7 @@ public class CharacterMovement : MonoBehaviour {
 		Vector3 right = _cam.right;
 
 		forward.y = 0.0f;
-		forward.z = 0.0f;
+		right.y = 0.0f;
 
 		forward.Normalize();
 		right.Normalize();
@@ -33,8 +34,8 @@ public class CharacterMovement : MonoBehaviour {
 		_vel = _cam.forward * moveInput.y + _cam.right * moveInput.x;
 
 		_cam.localEulerAngles += new Vector3(-viewInput.y, viewInput.x, 0.0f);
-
-		_cam.localEulerAngles = new Vector3(_cam.localEulerAngles.x, Mathf.Clamp(_cam.localEulerAngles.y, -90, 90), 0.0f);
+		Vector3 rot = _cam.localEulerAngles;
+		_cam.localEulerAngles = rot;
 
 		_rb.velocity = _vel * _moveSpeed;
 	}
